@@ -1,4 +1,4 @@
-<form method="POST" action="/dives">
+<form method="POST" action="/dives" enctype="multipart/form-data">
   <div>
     <label for="diveNo">Dive No.</label>
     <input type="number" name="diveNo" id="diveNo">
@@ -36,8 +36,8 @@
     <input type="text" name="review" id="review">
   </div>
   <div>
-    <label for="images">Images</label>
-    <input type="file" name="images" id="images">
+    <label for="image">Images</label>
+    <input type="file" name="image" id="image">
   </div>
 
   <button class="button">Post</button>

@@ -1,10 +1,10 @@
 <% dives.forEach((dive) => { %>
   <div>
     <a href="/dives/<%= dive.id %>"> <h2>Reviewed by: <%=  dive.createdBy.username %></h2>
-    <h3><%=  dive.diveSite %></h3> 
+    <h3><%=  dive.diveSite %></h3>
     <h4><%=  dive.location %></h4>
     <h5><%= dive.date %></h5>
-    <img src="<%= dive.images %>" alt="<%= %>">
+    <img src="<%= dive.imageSRC %>" alt="<%= dive.username %>">
       <p>
         <%= dive.review %><br>
       </p>

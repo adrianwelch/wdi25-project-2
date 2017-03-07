@@ -16,6 +16,7 @@ const imageSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   username: { type: String },
   email: { type: String },
+  aboutMe: { type: String },
   password: { type: String },
   image: { type: String},
   // images: [ imageSchema ],

@@ -20,12 +20,16 @@ router.route('/users/:id')
   .put(users.update)
   .delete(users.delete);
 
+router.route('/users/:id/edit')
+  .get(secureRoute, users.edit);
+
 router.route('/dives')
   .get(dives.index)
-  .post(secureRoute, dives.create);
+  .post(secureRoute, upload.single('image'), dives.create);
 
 router.route('/dives/new')
   .get(secureRoute, dives.new);
+
 
 router.route('/dives/:id')
   .get(dives.show)

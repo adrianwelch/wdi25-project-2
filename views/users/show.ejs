@@ -1,6 +1,7 @@
 <div>
 
 <h1><%= user.username %></h1>
+<h2><%= user.aboutMe %></h2>
 <img src="<%= user.imageSRC %>" alt="<%= user.username %>">
 
 <% dives.forEach((dive) => { %>
@@ -18,7 +19,7 @@
     <p><h4>Animal Tags</h4>
     <%= dive.animalTags %><br>
     </p>
-    <img src="<%= dive.images %>" alt="<%= %>">
+    <img src="<%= dive.imageSRC %>" alt="<%= dive.username %>">
       <p>
         <%= dive.review %><br>
       </p>

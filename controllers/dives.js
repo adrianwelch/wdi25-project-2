@@ -14,9 +14,8 @@ function newRoute(req, res) {
 }
 
 function createRoute(req, res, next) {
-
+  if(req.file) req.body.image = req.file.key;
   req.body.createdBy = req.user;
-
   Dive
     .create(req.body)
     .then(() => res.redirect('/dives'))

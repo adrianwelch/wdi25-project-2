@@ -35,7 +35,7 @@ const diveSchema = new mongoose.Schema({
   animalTags: { type: String },
   stars: { type: Number },
   review: { type: String },
-  images: { type: String },
+  image: { type: String },
   comments: [ commentSchema ]
 },{
   timestamps: true
@@ -44,8 +44,8 @@ const diveSchema = new mongoose.Schema({
 diveSchema
   .virtual('imageSRC')
   .get(function getImageSRC() {
-    if(!this.images) return null;
-    return `https://s3-eu-west-1.amazonaws.com/wdi-london-25/${this.images}`;
+    if(!this.image) return null;
+    return `https://s3-eu-west-1.amazonaws.com/wdi-london-25/${this.image}`;
   });
 
 diveSchema.pre('remove', function removeImage(next) {
