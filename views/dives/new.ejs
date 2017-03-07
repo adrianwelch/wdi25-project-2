@@ -1,0 +1,48 @@
+<form method="POST" action="/dives">
+  <div>
+    <label for="diveNo">Dive No.</label>
+    <input type="number" name="diveNo" id="diveNo">
+  </div>
+  <div>
+    <label for="date">Date</label>
+    <input type="date" name="date" id="date">
+  </div>
+  <div>
+    <label for="diveTime"> Dive Time</label>
+    <input type="number" name="diveTime" id="diveTime">
+  </div>
+  <div>
+    <label for="diveSite">Dive Site</label>
+    <input type="text" name="diveSite" id="diveSite">
+  </div>
+  <div>
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location">
+  </div>
+  <div>
+    <label for="diveShop">Dive Shop</label>
+    <input type="text" name="diveShop" id="diveShop">
+  </div>
+  <div>
+    <label for="animalTags">Animal Tags</label>
+    <input type="text" name="animalTags" id="animalTags">
+  </div>
+  <div>
+    <label for="stars">Stars</label>
+    <input type="number" name="stars" id="stars" min="1" max="5">
+  </div>
+  <div>
+    <label for="review">Review</label>
+    <input type="text" name="review" id="review">
+  </div>
+  <div>
+    <label for="image">Image</label>
+    <input type=string name="image" id="image">
+  </div>
+  <%# <div>
+    <label for="filename">Images</label>
+    <input type="file" name="filename" id="filename">
+  </div>%>
+
+  <button class="button">Post</button>
+</form>

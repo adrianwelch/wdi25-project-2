@@ -1,0 +1,47 @@
+<h1>Edit Dive</h1>
+
+<form method="POST" action="/dives/<%= dive.id %>">
+  <input type="hidden" name="_method" value="PUT">
+  <div class="form-group">
+    <label for="diveNo">Dive No.</label>
+    <input type="number" name="diveNo" id="diveNo" placeholder="Dive No" class="form-control" value="<%= dive.diveNo %>">
+  </div>
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="date" name="date" id="date"  class="form-control" value="<%= dive.date %>">
+  </div>
+  <div class="form-group">
+    <label for="diveTime">Dive Time</label>
+    <input type="number" name="diveTime" id="diveTime" placeholder="Dive Time" class="form-control" value="<%= dive.diveTime %>">
+  </div>
+  <div class="form-group">
+    <label for="diveSite">Dive Site</label>
+    <input type="text" name="diveSite" id="diveTime" placeholder="Dive Site" class="form-control" value="<%= dive.diveSite %>">
+  </div>
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" placeholder="Location" class="form-control" value="<%= dive.location %>">
+  </div>
+  <div class="form-group">
+    <label for="diveShop">Dive Shop</label>
+    <input type="text" name="diveShop" id="diveShop" placeholder="Dive Shop" class="form-control" value="<%= dive.diveShop %>">
+  </div>
+  <div class="form-group">
+    <label for="animalTags">Animal Tags</label>
+    <textarea name="Animal Tags" id="animalTags" placeholder="Animal Tags" placeholder="Animal Tags" class="form-control"><%= dive.animalTags %></textarea>
+  </div>
+  <div class="form-group">
+    <label for="stars">Stars</label>
+    <input type="number" name="stars" id="stars"  class="form-control" value="<%= dive.stars %>">
+  </div>
+
+  <div class="form-group">
+    <label for="review">Review</label>
+    <textarea name="review" id="review"  placeholder="review" class="form-control"><%= dive.review %></textarea>
+  </div>
+  <button class="btn btn-primary">Update</button>
+</form>
+
+<script>
+$("form").validate();
+</script>
