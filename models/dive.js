@@ -25,7 +25,7 @@ const imageSchema = new mongoose.Schema({
 });
 
 const diveSchema = new mongoose.Schema({
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true, timestamps: true },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   diveNo: { type: Number },
   date: { type: Date},
   diveTime: {type: Number},

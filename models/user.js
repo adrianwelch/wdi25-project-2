@@ -63,6 +63,10 @@ userSchema.pre('save', function hashPassword(next) {
   next();
 });
 
+userSchema.pre('remove', function removeUsersDives(next) {
+  this.model('Dive').remove({ createdBy: this.id }, next);
+});
+
 userSchema.pre('remove', function removeImage(next) {
   if(!this.image || this.image.match(/^http/)) return next();
   s3.deleteObject({ Key: this.image }, next);
