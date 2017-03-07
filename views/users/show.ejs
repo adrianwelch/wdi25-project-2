@@ -1,1 +1,37 @@
+<div>
+
 <h1><%= user.username %></h1>
+<img src="<%= user.imageSRC %>" alt="<%= user.username %>">
+
+<% dives.forEach((dive) => { %>
+  <div>
+    <a href="/dives/<%= dive.id %>">
+    <h5><%= dive.date %></h5>
+    <h2><%= dive.diveNo %></h2>
+    <h2><%= dive.diveShop %></h2>
+    <h4><%=  dive.location %></h4>
+    <h3><%= dive.diveTime %></h3>
+    <h3><%=  dive.diveSite %></h3>
+    <p>
+      <% while(dive.stars--) { %> &star; <% } %>
+    </p>
+    <p><h4>Animal Tags</h4>
+    <%= dive.animalTags %><br>
+    </p>
+    <img src="<%= dive.images %>" alt="<%= %>">
+      <p>
+        <%= dive.review %><br>
+      </p>
+    </a>
+  </div>
+<% }) %>
+
+<% if(locals.isAuthenticated  ) { %>
+  <a href="/users/<%= user.id %>/edit">Edit</a>
+  <form method="POST" action="/users/<%= user.id %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <button>Delete Account</button>
+  </form>
+<% } %>
+
+</div>

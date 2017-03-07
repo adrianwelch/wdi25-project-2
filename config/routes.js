@@ -5,12 +5,16 @@ const secureRoute = require('../lib/secureRoute');
 const dives = require('../controllers/dives');
 const users = require('../controllers/users');
 const oauth = require('../controllers/oauth');
-
+const upload = require('../lib/upload');
 
 router.get('/', (req, res) => res.render('statics/index'));
 
 router.route('/users')
   .get(users.index);
+
+  // router.route('/users/:id')
+  //   .delete(secureRoute, registrations.delete);
+
 router.route('/users/:id')
   .get(users.show)
   .put(users.update)
@@ -42,7 +46,7 @@ router.route('/dives/:id/comments/:commentId')
 
 router.route('/register')
 .get(registrations.new)
-.post(registrations.create);
+.post(upload.single('image'), registrations.create);
 
 router.route('/login')
 .get(sessions.new)

@@ -23,7 +23,8 @@ function showRoute(req, res, next) {
     return Dive.find({createdBy: user.id})
     .then((dives) => {
       res.render('users/show', { user, dives });
-    });
+    })
+    .catch(next);
   });
 }
 

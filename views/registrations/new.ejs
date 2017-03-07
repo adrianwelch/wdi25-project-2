@@ -1,4 +1,4 @@
-<form method="POST" action="/register">
+<form method="POST" action="/register" enctype="multipart/form-data">
   <div>
     <label for="username">Username</label>
     <input type="text" name="username" id="username">
@@ -7,6 +7,10 @@
     <label for="email">Email</label>
     <input type="email" name="email" id="email">
   </div>
+  <div>
+  <label for="image">Image</label>
+  <input type="file" name="image" id="image">
+</div>
   <div>
     <label for="password">Password</label>
     <input type="password" name="password" id="password">

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const s3 = require('../lib/s3');
 
 const commentSchema = new mongoose.Schema({
   content: { type: String, required: true },
@@ -34,10 +35,22 @@ const diveSchema = new mongoose.Schema({
   animalTags: { type: String },
   stars: { type: Number },
   review: { type: String },
-  images: [ imageSchema ],
+  images: { type: String },
   comments: [ commentSchema ]
 },{
   timestamps: true
+});
+
+diveSchema
+  .virtual('imageSRC')
+  .get(function getImageSRC() {
+    if(!this.images) return null;
+    return `https://s3-eu-west-1.amazonaws.com/wdi-london-25/${this.images}`;
+  });
+
+diveSchema.pre('remove', function removeImage(next) {
+  if(!this.image || this.image.match(/^http/)) return next();
+  s3.deleteObject({ Key: this.image }, next);
 });
 
 diveSchema.methods.ownedBy = function ownedBy(user) {
