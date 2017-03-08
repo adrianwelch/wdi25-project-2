@@ -7,6 +7,10 @@ $(() => {
   let map = null;
   const diveData = $('#map').data('dives');
 
+  const input = document.getElementById('location');
+  const autocomplete = new google.maps.places.Autocomplete(input);
+
+
   let infowindow = null;
 
   if ($map.length) initMap();
@@ -42,14 +46,14 @@ $(() => {
 
   function addMarker() {
     for (let i = 0; i < diveData.length; i++) {
-      const lat = diveData[i].lat;
-      const lng = diveData[i].lng;
-      console.log();
+      const latitude = diveData[i].latitude;
+      const longitude = diveData[i].longitude;
+      console.log(latitude, longitude);
 
-      const latLng = { lat: lat, lng: lng };
+      const latLng = { lat: latitude, lng: longitude };
       const marker = new google.maps.Marker({
         position: latLng,
-        map: map
+        map
       });
       marker.addListener('click', () => {
         markerClick(marker, diveData[i]);
@@ -66,8 +70,8 @@ $(() => {
       content: `
     <div class="infowindow">
     <a href="/dives/${diveData._id}">
-      <h3>${diveData.diveShop}</h3>
       <h3>Dive Shop: ${diveData.diveShop}</h3>
+      <h3>${diveData.stars--}</h3>
     </a>
     <a href="/users/${diveData.createdBy._id}">
       <small>Reviewed by:  ${diveData.createdBy.username}<small>

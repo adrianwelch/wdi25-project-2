@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema({
   aboutMe: { type: String },
   password: { type: String },
   image: { type: String},
-  // images: [ imageSchema ],
-  githubId: { type: String }
+  facebookId: { type: String},
+  githubId: { type: Number }
 });
 
 userSchema

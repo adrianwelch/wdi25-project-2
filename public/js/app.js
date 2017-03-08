@@ -9,6 +9,9 @@ $(function () {
   var map = null;
   var diveData = $('#map').data('dives');
 
+  var input = document.getElementById('location');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+
   var infowindow = null;
 
   if ($map.length) initMap();
@@ -44,11 +47,11 @@ $(function () {
 
   function addMarker() {
     var _loop = function _loop(i) {
-      var lat = diveData[i].lat;
-      var lng = diveData[i].lng;
-      console.log();
+      var latitude = diveData[i].latitude;
+      var longitude = diveData[i].longitude;
+      console.log(latitude, longitude);
 
-      var latLng = { lat: lat, lng: lng };
+      var latLng = { lat: latitude, lng: longitude };
       var marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -69,7 +72,7 @@ $(function () {
 
     // Update the infowindow variable to be a new Google InfoWindow
     infowindow = new google.maps.InfoWindow({
-      content: '\n    <div class="infowindow">\n    <a href="/dives/' + diveData._id + '">\n      <h3>' + diveData.diveShop + '</h3>\n      <h3>Dive Shop: ' + diveData.diveShop + '</h3>\n    </a>\n    <a href="/users/' + diveData.createdBy._id + '">\n      <small>Reviewed by:  ' + diveData.createdBy.username + '<small>\n    </a>\n    </div>\n    '
+      content: '\n    <div class="infowindow">\n    <a href="/dives/' + diveData._id + '">\n      <h3>Dive Shop: ' + diveData.diveShop + '</h3>\n      <h3>' + diveData.stars-- + '</h3>\n    </a>\n    <a href="/users/' + diveData.createdBy._id + '">\n      <small>Reviewed by:  ' + diveData.createdBy.username + '<small>\n    </a>\n    </div>\n    '
     });
 
     // Finally, open the new InfoWindow
