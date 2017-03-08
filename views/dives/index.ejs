@@ -1,3 +1,6 @@
+<% if(locals.isAuthenticated) { %>
+    <div id="map" data-lat=51.515113 data-lng=-0.072051>  </div>
+
 <% dives.forEach((dive) => { %>
   <div>
     <a href="/dives/<%= dive.id %>"> <h2>Reviewed by: <%=  dive.createdBy.username %></h2>
@@ -14,3 +17,7 @@
     </a>
   </div>
 <% }) %>
+
+<% } else { %>
+<h1> you have to be logged in </h1>
+<% } %>

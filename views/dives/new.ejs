@@ -15,13 +15,17 @@
     <label for="diveSite">Dive Site</label>
     <input type="text" name="diveSite" id="diveSite">
   </div>
-  <div>
+
     <label for="location">Location</label>
-    <input type="text" name="location" id="location">
+    <input class="controls" id="location" name="location" placeholder="Enter Location" style="width: 100%">
+    <input type="hidden" name="latitude">
+    <input type="hidden" name="longitude">
   </div>
+  <input type="hidden" name="lat" lat="">
+  <input type="hidden" name="lng" long="">
   <div>
-    <label for="diveShop">Dive Shop</label>
-    <input type="text" name="diveShop" id="diveShop">
+  <label for="diveShop">Dive Shop</label>
+  <input class="autocomplete" name="diveShop">
   </div>
   <div>
     <label for="animalTags">Animal Tags</label>
