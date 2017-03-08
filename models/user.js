@@ -27,19 +27,9 @@ userSchema
   .virtual('imageSRC')
   .get(function getImageSRC() { //only runs when we want to access that property
     if(!this.image) return null;
+    if(this.image.match(/^http/)) return this.image;
     return `https://s3-eu-west-1.amazonaws.com/wdi-london-25/${this.image}`;
   });
-
-
-
-//
-// userSchema
-//   .virtual('profileImageSRC')
-//   .get(function getProfileImageSRC(){
-//     if(!this.profileImage) return null;
-//     if(this.profileImage.match(/^http/)) return this.profileImage;
-//     return `https://s3-eu-west-1.amazonaws.com/wdi-london-25/${this.profileImage}`;
-//   });
 
 userSchema
   .virtual('passwordConfirmation') //virtual because dont want to store in database, if we didnt have virtual wouldnt beable to access it, virtual gets hold of it from req.body and set it on the record temporarily.

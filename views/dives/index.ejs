@@ -1,8 +1,7 @@
 <% if(locals.isAuthenticated) { %>
-    <div id="map" data-lat=51.515113 data-lng=-0.072051>  </div>
-
+    <div id="map" data-dives="<%= JSON.stringify(dives)%>" data-lat=51.515113 data-lng=-0.072051>  </div>
 <% dives.forEach((dive) => { %>
-  <div>
+  <div class="diveFeed">
     <a href="/dives/<%= dive.id %>"> <h2>Reviewed by: <%=  dive.createdBy.username %></h2>
     <h3><%=  dive.diveSite %></h3>
     <h4><%=  dive.location %></h4>

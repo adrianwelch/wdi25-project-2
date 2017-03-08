@@ -5,41 +5,124 @@ console.log('test');
 $(function () {
 
   var $map = $('#map');
+  var $showMap = $('#showMap');
   var map = null;
+  var diveData = $('#map').data('dives');
 
   var infowindow = null;
 
   if ($map.length) initMap();
+  if ($map.length) getLocation();
+  if ($showMap.length) showMap();
 
   function initMap() {
-    var latLng = { lat: 51.515113, lng: -0.072051 };
+    var latLng = { lat: -7.4749566, lng: 128.646121 };
     map = new google.maps.Map($map.get(0), {
-      zoom: 6,
+      zoom: 3,
       center: latLng,
       scrollwheel: false
       // Map styles are stored in another .js file - which is required above the app.js and is available inside this file
     });
+    addMarker();
   }
 
-  var $lat = $('input[name=lat]');
-  var $lng = $('input[name=lng]');
+  function showMap() {
+    var lat = $showMap.data('lat');
+    var lng = $showMap.data('lng');
+    var latLng = { lat: lat, lng: lng };
+    map = new google.maps.Map($showMap.get(0), {
+      zoom: 14,
+      center: latLng,
+      scrollwheel: false
+    });
 
-  var $input = $('.autocomplete');
-  var autocomplete = new google.maps.places.Autocomplete($input[0]);
+    new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+  }
 
-  autocomplete.addListener('place_changed', function () {
-    var place = autocomplete.getPlace(); //will get object in console log what we want is the geometry
-    var location = place.geometry.location.toJSON();
-    console.log(place.geometry.location.toJSON());
-    // $lat.val(location.lat);
-    // $lng.val(location.lng);
+  function addMarker() {
+    var _loop = function _loop(i) {
+      var lat = diveData[i].lat;
+      var lng = diveData[i].lng;
+      console.log();
 
-    var lat = location.lat;
-    var lng = location.lng;
-    console.log(lat, lng);
-    $lat.val(lat);
-    $lng.val(lng);
-    console.log($lat.val(), $lng.val());
-  });
-  infowindow.open(map);
+      var latLng = { lat: lat, lng: lng };
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+      marker.addListener('click', function () {
+        markerClick(marker, diveData[i]);
+      });
+    };
+
+    for (var i = 0; i < diveData.length; i++) {
+      _loop(i);
+    }
+  }
+
+  function markerClick(marker, diveData) {
+    // If there is an open infowindow on the map, close it
+    if (infowindow) infowindow.close();
+
+    // Update the infowindow variable to be a new Google InfoWindow
+    infowindow = new google.maps.InfoWindow({
+      content: '\n    <div class="infowindow">\n    <a href="/dives/' + diveData._id + '">\n      <h3>' + diveData.diveShop + '</h3>\n      <h3>Dive Shop: ' + diveData.diveShop + '</h3>\n    </a>\n    <a href="/users/' + diveData.createdBy._id + '">\n      <small>Reviewed by:  ' + diveData.createdBy.username + '<small>\n    </a>\n    </div>\n    '
+    });
+
+    // Finally, open the new InfoWindow
+    infowindow.open(map, marker);
+  }
+
+  ///////////////////////       geo location       ///////////////////////
+  // function getLocation(){
+  //   if (navigator.geolocation) {
+  //     const infoWindow = new google.maps.InfoWindow();
+  //     navigator.geolocation.getCurrentPosition(function(position) {
+  //       var pos = {
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude
+  //       };
+  //       infoWindow.setPosition(pos);
+  //       infoWindow.setContent('You are here!');
+  //       infoWindow.open(map);
+  //       map.setCenter(pos);
+  //     }, function() {
+  //       handleLocationError(true, infoWindow, map.getCenter());
+  //     });
+  //   } else {
+  //      // Browser doesn't support Geolocation
+  //     handleLocationError(false, infowindow, map.getCenter());
+  //   }
+  // }
+
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
+  }
+
+  function initialize() {
+    var input = document.getElementById('diveShop');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      var place = autocomplete.getPlace();
+      console.log(place);
+      var lat = place.geometry.location.lat();
+      var lng = place.geometry.location.lng();
+      $('input[name="latitude"]').val(lat);
+      $('input[name="longitude"]').val(lng);
+    });
+  }
+
+  // google.maps.event.addDomListener(window, 'load', initialize);
+
+  initialize();
+
+  // });
+
+  // showMap();
 });

@@ -19,17 +19,14 @@ function newRoute(req, res){
 
 function showRoute(req, res, next) {
   User.findById(req.params.id)
-  .then((user) => {
-    return Dive.find({createdBy: user.id})
+  .then((showUser) => {
+    return Dive.find({createdBy: showUser.id})
     .then((dives) => {
-      res.render('users/show', { user, dives });
+      res.render('users/show', { showUser, dives });
     })
     .catch(next);
   });
 }
-
-
-
 // function showRoute(req, res, next) {
 //   User
 //     .findById(req.params.id)

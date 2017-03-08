@@ -1,8 +1,8 @@
 <div>
 
-<h1><%= user.username %></h1>
-<h2><%= user.aboutMe %></h2>
-<img src="<%= user.imageSRC %>" alt="<%= user.username %>">
+<h1><%= showUser.username %></h1>
+<h2><%= showUser.aboutMe %></h2>
+<img src="<%= showUser.imageSRC %>" alt="<%= showUser.username %>">
 
 <% dives.forEach((dive) => { %>
   <div>
@@ -27,9 +27,9 @@
   </div>
 <% }) %>
 
-<% if(locals.isAuthenticated  ) { %>
-  <a href="/users/<%= user.id %>/edit">Edit</a>
-  <form method="POST" action="/users/<%= user.id %>">
+<% if(locals.isAuthenticated && (user.id === showUser.id)) { %>
+  <a href="/users/<%= showUser.id %>/edit">Edit</a>
+  <form method="POST" action="/users/<%= showUser.id %>">
     <input type="hidden" name="_method" value="DELETE">
     <button>Delete Account</button>
   </form>
