@@ -1,38 +1,50 @@
-<div>
+<div class="container">
+  <div class="userDives row">
+    <div class="col-12">
+      <div class="username">
+        <h1 class="userShow"><%= showUser.username %></h1>
+      </div>
 
-<h1><%= showUser.username %></h1>
-<h2><%= showUser.aboutMe %></h2>
-<img src="<%= showUser.imageSRC %>" alt="<%= showUser.username %>">
+      <div class="bio row">
+        <div class="col-md-6">
+          <img class= "profilePic" src="<%= showUser.imageSRC %>" alt="<%= showUser.username %>">
 
-<% dives.forEach((dive) => { %>
-  <div>
-    <a href="/dives/<%= dive.id %>">
-    <h5><%= dive.date %></h5>
-    <h2><%= dive.diveNo %></h2>
-    <h2><%= dive.diveShop %></h2>
-    <h4><%=  dive.location %></h4>
-    <h3><%= dive.diveTime %></h3>
-    <h3><%=  dive.diveSite %></h3>
-    <p>
-      <% while(dive.stars--) { %> &star; <% } %>
-    </p>
-    <p><h4>Animal Tags</h4>
-    <%= dive.animalTags %><br>
-    </p>
-    <img src="<%= dive.imageSRC %>" alt="<%= dive.username %>">
-      <p>
-        <%= dive.review %><br>
-      </p>
-    </a>
+        </div>
+        <div class="col-md-6 aboutMe">
+          <h2>Bio</h2>
+          <p><%= showUser.aboutMe %></p>
+          <% if(locals.isAuthenticated && (user.id === showUser.id)) { %>
+            <a href="/users/<%= showUser.id %>/edit" class="btn"><button class= "btn btn-danger btn-lg edDel">Edit</button></a>
+            <form method="POST" action="/users/<%= showUser.id %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="reg btn btn-danger btn-lg edDel">Delete Account</button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
   </div>
-<% }) %>
+  <div class="userDives row">
 
-<% if(locals.isAuthenticated && (user.id === showUser.id)) { %>
-  <a href="/users/<%= showUser.id %>/edit">Edit</a>
-  <form method="POST" action="/users/<%= showUser.id %>">
-    <input type="hidden" name="_method" value="DELETE">
-    <button>Delete Account</button>
-  </form>
-<% } %>
+  <% dives.forEach((dive) => { %>
+    <div class="col-md-4">
+      <a href="/dives/<%= dive.id %>">
+      <div class="resources">
+      <p>
+        <% while(dive.stars--) { %> &star; <% } %>
+      </p>
+      </p>
+      <img class="userImgs"src="<%= dive.imageSRC %>" alt="<%= dive.username %>">
+        <p>
+      <h3 class="indexText"><%=  dive.diveSite %></h3>
+      <h4 class="indexText"><%=  dive.location %></h4>
+      <h5 class="indexText Date"><%= new Date(dive.date).toDateString() %></h5>
+        </p>
+      </div>
+      </a>
+      </div>
+  <% }) %>
+</div>
+
 
 </div>

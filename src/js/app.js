@@ -9,7 +9,7 @@ $(() => {
 
   const input = document.getElementById('location');
   const autocomplete = new google.maps.places.Autocomplete(input);
-
+  // const autocomplete = new google.maps.places.Autocomplete(input);
 
   let infowindow = null;
 
@@ -68,16 +68,16 @@ $(() => {
     // Update the infowindow variable to be a new Google InfoWindow
     infowindow = new google.maps.InfoWindow({
       content: `
-    <div class="infowindow">
-    <a href="/dives/${diveData._id}">
-      <h3>Dive Shop: ${diveData.diveShop}</h3>
-      <h3>${diveData.stars--}</h3>
-    </a>
-    <a href="/users/${diveData.createdBy._id}">
-      <small>Reviewed by:  ${diveData.createdBy.username}<small>
-    </a>
-    </div>
-    `
+        <div class="infowindow">
+        <a href="/dives/${diveData._id}">
+          <h3 class="diveShopInfo">Dive Shop: ${diveData.diveShop}</h3>
+          <h3 class="diveShopInfo">${'&star;'.repeat(diveData.stars)}</h3>
+        </a>
+        <a href="/users/${diveData.createdBy._id}">
+          <small>Reviewed by:  ${diveData.createdBy.username}<small>
+        </a>
+        </div>
+      `
     });
 
     // Finally, open the new InfoWindow
@@ -136,5 +136,15 @@ $(() => {
   // });
 
   // showMap();
+//   const $weather = $('#weather');
+//   const place = autocomplete.getPlace();
+//   const lat = place.geometry.location.lat();
+//   const lng = place.geometry.location.lng();
+//   console.log(lat, lng);
+//   $.get('http://api.wunderground.com/api/10f9a177231a4651833122453170903/tide/q/CA/San_Francisco.json')
+//   .done((data => {
+//     console.log(data);
+//   })
+// );
 
 });

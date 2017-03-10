@@ -12,9 +12,6 @@ router.get('/', (req, res) => res.render('statics/index'));
 router.route('/users')
   .get(users.index);
 
-  // router.route('/users/:id')
-  //   .delete(secureRoute, registrations.delete);
-
 router.route('/users/:id')
   .get(users.show)
   .put(users.update)
@@ -44,9 +41,6 @@ router.route('/dives/:id/comments')
 
 router.route('/dives/:id/comments/:commentId')
   .delete(secureRoute, dives.deleteComment);
-
-// router.route('/profile')
-// .get(secureRoute, registrations.show);
 
 router.route('/register')
 .get(registrations.new)

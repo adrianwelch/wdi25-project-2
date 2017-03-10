@@ -1,64 +1,62 @@
 <% if(locals.isAuthenticated) { %>
-<div>
-  <div id="showMap" data-dive="<%= JSON.stringify(dive)%>" data-lat=<%= dive.latitude %> data-lng=<%= dive.longitude %>></div>
-  <h2><%= dive.diveNo %></h2>
-  <h2><%= dive.diveShop %></h2>
-  <h3><%= dive.location %></h3>
-  <h3><%= dive.diveTime %></h3>
-  <h3><%= dive.diveSite %></h3>
+<div class="diveResource">
+  <div class="container">
 
-  <p>
-    <% while(dive.stars--) { %> &star; <% } %>
-  </p>
-  <h4><%= dive.date %></h4>
-  <a href="/users/<%= dive.createdBy.id %>">Dive username: <%= dive.createdBy.username %></a>
+    <h3 class="diveSite"><%= dive.diveSite %> , <%= dive.location %></h3>
 
-  <p><h4>Animal Tags</h4>
-  <%= dive.animalTags %><br>
-  </p>
+    <p class="stars"><% while(dive.stars--) { %> &star; <% } %></p>
 
-  <img src="<%= dive.imageSRC %>" alt="<%= dive.username %>">
-  <p><h5>Review</h5>
-    <%= dive.review %><br>
-  </p>
+    <a class="reviewedBy" href="/users/<%= dive.createdBy.id %>"> Reviewed By: <%= dive.createdBy.username %></a><hr>
+    <img class="diveImg"src="<%= dive.imageSRC %>" alt="<%= dive.username %>">
 
-  <% if(locals.isAuthenticated && dive.ownedBy(user)) { %>
-    <a href="/dives/<%= dive.id %>/edit">Edit</a>
-    <form method="POST" action="/dives/<%= dive.id %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <button>Delete Review</button>
-    </form>
+    <div class="content">
+      <h4 class="dateDive"><%= new Date(dive.date).toDateString() %></h4>
+      <h2><%= dive.diveShop %></h2>
+      <h2 class="diveNoTime">Dive No:  <%= dive.diveNo %> <br>Dive Time: <%= dive.diveTime %> mins</h2>
+      <h4>Animal Tags: <%= dive.animalTags %></h4>
 
+      <% if(locals.isAuthenticated && dive.ownedBy(user)) { %>
 
-  <% } %>
+        <a href="/dives/<%= dive.id %>/edit" class="btn"><button class= "btn btn-danger btn-lg edDelDive">Edit</button></a>
+        <form class= "deleteForm" method="POST" action="/dives/<%= dive.id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="reg btn btn-danger btn-lg edDelDive delRev">Delete Review</button>
+        </form>
+      <% } %>
 
+      <hr>
+      <h5 class="reviewHeader">Review</h5>
+      <h5 class"diveReview"><%= dive.review %></h5><hr class="secondHr">
 
-  <section>
-    <h6>Comments</h6>
-    <% dive.comments.forEach((comment) => { %>
-      <small><%= comment.createdBy.username %></small>
-      <p><%= comment.content %></p>
+      <div id="showMap" class= "center-block" data-dive="<%= JSON.stringify(dive)%>" data-lat=<%= dive.latitude %> data-lng=<%= dive.longitude %>></div>
 
-      <% if(locals.isAuthenticated && comment.ownedBy(user)) { %>
-      <form method="POST" action="/dives/<%= dive.id %>/comments/<%= comment.id %>">
-       <input type="hidden" name="_method" value="DELETE">
-       <button>Delete</button>
-       </form>
-     <% } %>
-    <% }) %>
-  </section>
+      <% if(locals.isAuthenticated) { %>
+        <section>
+          <form class="deleteForm"method="POST" action="/dives/<%= dive.id %>/comments">
+            <textarea name="content" id="content" placeholder="Comment"></textarea>
+            <button class="reg btn btn-primary btn-default comment">Leave a comment</button>
+          </form>
+        </section>
+      <% } %>
+      <section>
+        <h6 class="commentHeader">Comments</h6>
+        <% dive.comments.forEach((comment) => { %>
+          <a href="/users/<%= comment.createdBy.id %>">
+          <img class="commentProfile" src="<%= comment.createdBy.imageSRC %>">
+          <small class="commentBy"><%= comment.createdBy.username %></small> </a>
+          <p><%= comment.content %></p>
 
-  <% if(locals.isAuthenticated) { %>
-    <section>
-      <h4>Leave a comment</h4>
-      <form method="POST" action="/dives/<%= dive.id %>/comments">
-        <textarea name="content" id="content" placeholder="Comment"></textarea>
-        <button class="button">Leave a comment</button>
-      </form>
-    </section>
-  <% } %>
+          <% if(locals.isAuthenticated && comment.ownedBy(user)) { %>
+            <form method="POST" action="/dives/<%= dive.id %>/comments/<%= comment.id %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="reg btn btn-danger btn-sm dltCmmnt ">Delete</button>
+            </form>
+          <% } %>
+        <% }) %>
+      </section>
+    </div>
+  </div>
 </div>
-
 <% } else { %>
-<h1> you have to be logged in </h1>
+  <h1> you have to be logged in </h1>
 <% } %>

@@ -70,7 +70,7 @@ function facebook(req, res, next) {
  .then((token) => {
 
    return rp.get({
-     url: 'https://graph.facebook.com/v2.5/me?fields=id,name,email,picture',
+     url: 'https://graph.facebook.com/v2.5/me?fields=id,name,email,picture.height(961)',
      qs: token,
      redirect_uri: 'http://localhost:3000/oauth/facebook',
      json: true
@@ -96,7 +96,7 @@ function facebook(req, res, next) {
    req.session.userId = user.id;
    req.session.isAuthenticated = true;
 
-   req.flash('info', `welcome back ${user.username}!`);
+   req.flash('info', `Welcome Back ${user.username}!`);
    res.redirect('/dives');
  })
  .catch(next);

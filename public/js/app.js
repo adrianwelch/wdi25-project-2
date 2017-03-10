@@ -11,6 +11,7 @@ $(function () {
 
   var input = document.getElementById('location');
   var autocomplete = new google.maps.places.Autocomplete(input);
+  // const autocomplete = new google.maps.places.Autocomplete(input);
 
   var infowindow = null;
 
@@ -72,7 +73,7 @@ $(function () {
 
     // Update the infowindow variable to be a new Google InfoWindow
     infowindow = new google.maps.InfoWindow({
-      content: '\n    <div class="infowindow">\n    <a href="/dives/' + diveData._id + '">\n      <h3>Dive Shop: ' + diveData.diveShop + '</h3>\n      <h3>' + diveData.stars-- + '</h3>\n    </a>\n    <a href="/users/' + diveData.createdBy._id + '">\n      <small>Reviewed by:  ' + diveData.createdBy.username + '<small>\n    </a>\n    </div>\n    '
+      content: '\n        <div class="infowindow">\n        <a href="/dives/' + diveData._id + '">\n          <h3 class="diveShopInfo">Dive Shop: ' + diveData.diveShop + '</h3>\n          <h3 class="diveShopInfo">' + '&star;'.repeat(diveData.stars) + '</h3>\n        </a>\n        <a href="/users/' + diveData.createdBy._id + '">\n          <small>Reviewed by:  ' + diveData.createdBy.username + '<small>\n        </a>\n        </div>\n      '
     });
 
     // Finally, open the new InfoWindow
@@ -128,4 +129,14 @@ $(function () {
   // });
 
   // showMap();
+  //   const $weather = $('#weather');
+  //   const place = autocomplete.getPlace();
+  //   const lat = place.geometry.location.lat();
+  //   const lng = place.geometry.location.lng();
+  //   console.log(lat, lng);
+  //   $.get('http://api.wunderground.com/api/10f9a177231a4651833122453170903/tide/q/CA/San_Francisco.json')
+  //   .done((data => {
+  //     console.log(data);
+  //   })
+  // );
 });
