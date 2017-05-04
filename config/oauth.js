@@ -18,7 +18,7 @@ module.exports = {
     clientSecret: process.env.FB_CLIENT_SECRET,
     scope: 'user:email',
     getLoginURL() {
-      return `${this.loginURL}?client_id=${this.clientId}&redirect_uri=http://localhost:3000/oauth/facebook`;
+      return `${this.loginURL}?client_id=${this.clientId}&redirect_uri=https://quiet-taiga-63855.herokuapp.com/oauth/facebook`;
     }
   }
 };
