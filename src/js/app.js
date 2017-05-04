@@ -5,9 +5,6 @@ $(() => {
   const $showMap = $('#showMap');
   let map = null;
   const diveData = $('#map').data('dives');
-
-  const input = document.getElementById('location');
-  const autocomplete = new google.maps.places.Autocomplete(input);
   // const autocomplete = new google.maps.places.Autocomplete(input);
 
   let infowindow = null;
@@ -115,7 +112,7 @@ $(() => {
   }
 
   function initialize() {
-    const input = document.getElementById('diveShop');
+    const input = document.getElementById('location');
     const autocomplete = new google.maps.places.Autocomplete(input);
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {

@@ -7,9 +7,6 @@ $(function () {
   var $showMap = $('#showMap');
   var map = null;
   var diveData = $('#map').data('dives');
-
-  var input = document.getElementById('location');
-  var autocomplete = new google.maps.places.Autocomplete(input);
   // const autocomplete = new google.maps.places.Autocomplete(input);
 
   var infowindow = null;
@@ -108,7 +105,7 @@ $(function () {
   }
 
   function initialize() {
-    var input = document.getElementById('diveShop');
+    var input = document.getElementById('location');
     var autocomplete = new google.maps.places.Autocomplete(input);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
