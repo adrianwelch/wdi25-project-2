@@ -14,7 +14,7 @@ $(() => {
   let infowindow = null;
 
   if ($map.length) initMap();
-  if ($map.length) getLocation();
+  // if ($map.length) getLocation();
   if ($showMap.length) showMap();
 
   function initMap() {
