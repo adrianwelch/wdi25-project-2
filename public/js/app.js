@@ -1,6 +1,5 @@
 'use strict';
 
-console.log('test');
 /* global google:ignore */
 $(function () {
 
