@@ -1,6 +1,6 @@
-#GA WDI London, Project 2, March 2017
+# GA WDI London, Project 2, March 2017
 
-#DiveBook
+# DiveBook
 
 
 ![alt text][logo]
