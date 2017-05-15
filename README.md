@@ -22,8 +22,6 @@ To run the app on a local host run gulp in the terminal and the application will
 
 **Technologies Used**
 
-Technologies used;
-
 * The app is built in Node JS with Express.
 * Mongo database was used to store the data, with mongoose used to create models within express.
 * AWS is used to allow users to upload images.
