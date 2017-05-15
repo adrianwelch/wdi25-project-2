@@ -1,6 +1,11 @@
-**GA WDI London, Project 2, March 2017**
+#GA WDI London, Project 2, March 2017
 
-**DiveBook**
+#DiveBook
+
+
+![alt text][logo]
+
+[logo]: http://i.imgur.com/M3hpiO5.png
 
 DiveBook is a full stack web app built using Node.js/Express. The app allows scuba divers to add diving sites they have been to around the world and review them. Users are able to add information to each dive such as rating, review and images.
 
